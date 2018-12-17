@@ -1,0 +1,34 @@
+<link rel="import" href="bower_components/note-app-elements/na-elements.html">
+<link rel="import" href="bower_components/app-storage/app-indexeddb-mirror/app-indexeddb-mirror.html">
+<link rel="import" href="bower_components/polymerfire/polymerfire.html">
+
+<dom-module id="fitness-app">
+  <template>
+    <style include="note-app-shared-styles"></style>
+    <na-toolbar
+	    signed-in="[[signedIn]]"
+	    on-sign-out="signOut">
+    </na-toolbar>
+    <na-login
+	    on-sign-in="signIn"
+	    signed-in="[[signedIn]]"
+	    disabled="[[!online]]">
+    </na-login>
+    <firebase-auth
+	    id="auth"
+	    app-name="fitness"
+	    provider="google"
+	    signed-in="{{signedIn}}"
+	    user="{{user}}">
+	</firebase-auth>
+  </template>
+  <script>
+    Polymer({
+      is: 'fitness-app',
+      behaviors: [Polymer.NoteAppBehavior],
+      signIn: function() {
+      this.$.auth.signInWithPopup();
+    }
+    });
+  </script>
+</dom-module>
