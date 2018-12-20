@@ -1,0 +1,22 @@
+{
+  "name": "fitness-app",
+  "version": "1.0.0",
+  "description": "Track your health and Get fit",
+  "main": "index.js",
+  "scripts": {
+    "start": "http-server -c-1"
+  },
+  "keywords": [
+    "track",
+    "health",
+    "get",
+    "fit",
+    "fitness",
+    "app"
+  ],
+  "author": "Hash It Out",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^0.10.0"
+  }
+}
