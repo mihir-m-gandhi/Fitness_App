@@ -1,9 +1,7 @@
-# Progressive Web Apps - Complete Guide
-This source code is part of Maximilian Schwarzmüller's "Progressive Web Apps - Complete Guide" course on udemy.com.
+Progressive Web App for IAZI
 
-# How to Use
-You need [Node.js](https://nodejs.org) installed on your machine. Simply download the installer from [nodejs.org](https://nodejs.org) and go through the installation steps.
+A progressive web app to track the fitness and diet of the user.
 
-Once Node.js is installed, open your command prompt or terminal and **navigate into this project folder**. There, run `npm install` to install all required dependencies.
+Can be used to track the steps, distance, calories burnt by the user, and also record activities. Further represent the data graphically.
 
-Finally, run `npm start` to start the development server and visit [localhost:8080](http://localhost:8080) to see the running application.
+User can also chat with the trainer to get tips on diet and exercise.
