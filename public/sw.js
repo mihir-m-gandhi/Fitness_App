@@ -1,4 +1,7 @@
-var CACHE_STATIC_NAME = 'static-v6';		//change these versions when some files are changed
+importScripts('/src/js/idb.js');
+importScripts('/src/js/utility.js');
+
+var CACHE_STATIC_NAME = 'static-v8';		//change these versions when some files are changed
 var CACHE_DYNAMIC_NAME = 'dynamic-v3';
 
 var STATIC_FILES = [
@@ -7,6 +10,7 @@ var STATIC_FILES = [
 	'offline.html',
 	'/src/js/app.js',
 	'/src/js/feed.js',
+  '/src/js/idb.js',
 	'/src/js/promise.js',	//only needed on older browsers which probably don't support sw, but we still cache them to imoprove performance
 	'/src/js/fetch.js',
 	'/src/js/material.min.js',
@@ -16,7 +20,7 @@ var STATIC_FILES = [
 	'https://fonts.googleapis.com/css?family=Roboto:400,700',	//this server should set CORS headers to allow cross origin resource sharing, else error
 	'https://fonts.googleapis.com/icon?family=Material+Icons',
 	'https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.3.0/material.indigo-pink.min.css'
-	];
+	];  
 
 // function trimCache(cacheName, maxItems) {
 //   caches.open(cacheName)
@@ -72,19 +76,23 @@ function isInArray(string, array) {		//to check if a givem link is in cache
 
 self.addEventListener('fetch', function (event) {
 
-  var url = 'https://httpbin.org/get';
+  var url = 'https://fitness-app-b7baa.firebaseio.com/posts';
   if (event.request.url.indexOf(url) > -1) {
-    event.respondWith(
-      caches.open(CACHE_DYNAMIC_NAME)
-        .then(function (cache) {
-          return fetch(event.request)
-            .then(function (res) {
-              // trimCache(CACHE_DYNAMIC_NAME, 3);
-              cache.put(event.request, res.clone());
+    event.respondWith(fetch(event.request)
+            .then(function (res) { 
+              var clonedRes = res.clone();
+              clearAllData('posts')
+                .then(function(){
+                  return clonedRes.json()  //returns a promise
+                })
+                .then(function(data){
+                    for(var key in data){
+                      writeData('posts', data[key]);
+                    }
+                }); 
               return res;
-            });
-        })
-    );
+            })
+          );
   } else if (isInArray(event.request.url, STATIC_FILES)) {
     event.respondWith(
       caches.match(event.request)
