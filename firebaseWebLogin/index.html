@@ -1,44 +1,73 @@
 <html>
+
 <head>
   <title>Firebase Login</title>
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+
+<body style="background-color:white">
+
 
   <div id="login_div" class="main-div">
-    <h3>Firebase Web login Example</h3>
-    <input type="email" placeholder="Email..." id="email_field" />
-    <input type="password" placeholder="Password..." id="password_field" />
+    <button class="collapsible" >Welcome to GetFit</button>
+    <div class="content" style="background-color:#f1f1f1">
+      <h3>Firebase Web login Example</h3>
+      <input type="email" placeholder="Email..." id="email_field" />
+      <input type="password" placeholder="Password..." id="password_field" />
 
-    <button onclick="login()">Login to Account</button>
-    <button onclick="createAccount()">Create Account</button>
+      <button onclick="login()">Login to Account</button>
+      <hr>
+      <button onclick="createAccount()">Create Account</button>
+      <br>
+    </div>
   </div>
 
   <div id="user_div" class="loggedin-div">
-    <h3>Welcome User</h3>
-    <p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
-    <button onclick="logout()">Logout</button>
-    <button onclick="validateUser()">Validate email</button>
+    <button class="collapse" style="background-color:#777;">Welcome User</button>
+    <div class="content" style="background-color:#f1f1f1">
+      <p id="user_para">Welcome to Firebase web login Example. You're currently logged in.</p>
+      <button onclick="logout()">Logout</button>
+      <hr>
+      <button onclick="validateUser()">Validate email</button>
+      <br>
+    </div>
   </div>
 
 
 
- 
-<script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyB9Vyfa0i-mPjfMS9QRwznMKsju39T4KzU",
-    authDomain: "fitness-app-b7baa.firebaseapp.com",
-    databaseURL: "https://fitness-app-b7baa.firebaseio.com",
-    projectId: "fitness-app-b7baa",
-    storageBucket: "fitness-app-b7baa.appspot.com",
-    messagingSenderId: "548323215464"
-  };
-  firebase.initializeApp(config);
-</script>
+
+  <script src="https://www.gstatic.com/firebasejs/5.7.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyB9Vyfa0i-mPjfMS9QRwznMKsju39T4KzU",
+      authDomain: "fitness-app-b7baa.firebaseapp.com",
+      databaseURL: "https://fitness-app-b7baa.firebaseio.com",
+      projectId: "fitness-app-b7baa",
+      storageBucket: "fitness-app-b7baa.appspot.com",
+      messagingSenderId: "548323215464"
+    };
+    firebase.initializeApp(config);
+  </script>
   <script src="index.js"></script>
 
+  <script>
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+    for (i = 0; i < coll.length; i++) {
+      coll[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+          content.style.display = "none";
+        } else {
+          content.style.display = "block";
+        }
+      });
+    }
+  </script>
+
 </body>
+
 </html>
