@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img height=200px src="./logo.png" alt="Fitness-App"></a>
+ <img height=200px src="./Public/src/images/main-image-sm.jpg" alt="Fitness-App"></a>
 </p>
 
 <h1 align="center">Fitness PWA</h1>
